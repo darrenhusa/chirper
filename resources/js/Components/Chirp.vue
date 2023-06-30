@@ -32,8 +32,7 @@ const editing = ref(false);
                     <!-- <small class="ml-2 text-sm text-gray-600">{{ new Date(chirp.created_at).toLocaleString() }}</small> -->
                     <small class="ml-2 text-sm text-gray-600">{{ dayjs(chirp.created_at).fromNow() }}</small>
                     <small v-if="chirp.created_at !== chirp.updated_at" class="text-sm text-gray-600"> &middot; edited</small>                    
-                </div>
-            </div>
+                </div>            
             <Dropdown v-if="chirp.user.id === $page.props.auth.user.id">
                     <template #trigger>
                         <button>
@@ -51,7 +50,7 @@ const editing = ref(false);
                         </DropdownLink>
                     </template>
                 </Dropdown>
-            
+            </div>
             <form v-if="editing" @submit.prevent="form.put(route('chirps.update', chirp.id), { onSuccess: () => editing = false })">
                 <textarea v-model="form.message" class="mt-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
                 <InputError :message="form.errors.message" class="mt-2" />
